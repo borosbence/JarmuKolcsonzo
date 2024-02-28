@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace JarmuKolcsonzo.WPF.ViewModels
 {
@@ -46,13 +47,13 @@ namespace JarmuKolcsonzo.WPF.ViewModels
 
         public List<int> IPPList { get; }
 
-        private int itemsPerPage = 20;
+        private int itemsPerPage;
         public int ItemsPerPage
         {
             get { return itemsPerPage; }
             set { SetProperty(ref itemsPerPage, value); LoadData(); }
         }
-        protected int page = 1;
+        protected int page;
         private int pageCount;
 
         private int _totalItems;
@@ -91,7 +92,9 @@ namespace JarmuKolcsonzo.WPF.ViewModels
             PreviousPageCmd = new RelayCommand(PrevPage);
             NextPageCmd = new RelayCommand(NextPage);
             LastPageCmd = new RelayCommand(LastPage);
-            IPPList = new List<int>() { 10, 20, 50 };
+            IPPList = [10, 20, 50];
+            page = 1;
+            itemsPerPage = 20;
         }
         protected abstract Task LoadData();
 

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using JarmuKolcsonzo.Model.Entities;
 using JarmuKolcsonzo.WPF.Commands;
+using JarmuKolcsonzo.WPF.Validators;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -9,8 +10,8 @@ namespace JarmuKolcsonzo.WPF.ViewModels
 {
     public class JarmuvekViewModel : PagerViewModel, IEditCommands<Jarmu>
     {
-        private IPagerRepository<Jarmu> _jarmuRepo;
-        private IGenericRepository<JarmuTipus> _jarmuTipusRepo;
+        private readonly IPagerRepository<Jarmu> _jarmuRepo;
+        private readonly IGenericRepository<JarmuTipus> _jarmuTipusRepo;
 
         private ObservableCollection<Jarmu> _jarmuvek = new();
         public ObservableCollection<Jarmu> Jarmuvek

@@ -30,7 +30,7 @@ namespace ApiClient.Repositories
             var dictFormUrlEncoded = new FormUrlEncodedContent(queryParameters);
             var queryString = await dictFormUrlEncoded.ReadAsStringAsync();
 
-            return await client.GetFromJsonAsync<TableDTO<T>>($"{_path}?{queryString}");
+            return await client.GetFromJsonAsync<TableDTO<T>?>($"{_path}?{queryString}");
         }
     }
 }

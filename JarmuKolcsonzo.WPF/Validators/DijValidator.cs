@@ -15,7 +15,7 @@ namespace JarmuKolcsonzo.WPF.Validators
                     return ValidationResult.ValidResult;
                 }
             }
-            return new ValidationResult(false, "A mező csak 0-nál nagoybb számot tartalmazhat.");
+            return new ValidationResult(false, "A mező csak 0-nál nagyobb számot tartalmazhat.");
         }
     }
 }

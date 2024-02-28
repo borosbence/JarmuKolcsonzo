@@ -9,8 +9,8 @@ namespace ApiClient.MAUI.Handlers
 {
     public class TokenAuthHandler : DelegatingHandler
     {
-        private string _path = "api/token/refresh";
-        private string? _baseUrl;
+        private readonly string _path = "api/token/refresh";
+        private readonly string? _baseUrl;
         private string _accessToken;
         private string _refreshToken;
 
@@ -38,22 +38,22 @@ namespace ApiClient.MAUI.Handlers
             {
                 // Küld egy új kérést, hogy megkapja a tokent
                 var refreshReqMessage = new HttpRequestMessage(HttpMethod.Post, _baseUrl + _path);
-                var oldToken = new JwtToken(_accessToken, _refreshToken);
+                var oldToken = new JwtModel(_accessToken, _refreshToken);
                 refreshReqMessage.Content = new StringContent(JsonSerializer.Serialize(oldToken), Encoding.UTF8, "application/json");
 
                 // Token válasz a szervertől
                 var refreshRequest = await base.SendAsync(refreshReqMessage, cancellationToken);
-                var jwtToken = await refreshRequest.Content.ReadFromJsonAsync<JwtToken>();
+                var jwtToken = await refreshRequest.Content.ReadFromJsonAsync<JwtModel>();
 
                 if (jwtToken != null)
                 {
                     // TODO: átalakítani referencia paraméterként
-                    _accessToken = jwtToken.Access_Token;
-                    _refreshToken = jwtToken.Refresh_Token;
+                    _accessToken = jwtToken.AccessToken;
+                    _refreshToken = jwtToken.RefreshToken;
 
                     // Jelenlegi fejléc cseréje
                     request.Headers.Remove("Authorization");
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken.Access_Token);
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken.AccessToken);
                 }
 
                 // Kérés újrapróbálása az új tokenekkel
