@@ -71,7 +71,7 @@ namespace JarmuKolcsonzo.WPF.ViewModels
                 // Túlcsordulás esetén az utolsó oldalra lépjen
                 if (page > pageCount)
                 {
-                    page = pageCount;
+                    LastPage();
                 }
             }
         }
